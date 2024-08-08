@@ -34,7 +34,6 @@ public class MappingUtils {
         PoemDTO dto = new PoemDTO();
         dto.setId(poem.getId());
         dto.setName(poem.getName());
-        dto.setAuthor(poem.getAuthor());
         dto.setContent(poem.getContent());
         return dto;
     }
@@ -43,7 +42,6 @@ public class MappingUtils {
         Poem poem = new Poem();
         poem.setId(dto.getId());
         poem.setName(dto.getName());
-        poem.setAuthor(dto.getAuthor());
         poem.setContent(dto.getContent());
         return poem;
     }
