@@ -21,21 +21,21 @@ public class UserService {
         this.mappingUtils = mappingUtils;
     }
 
-    public List<UserDTO> findAll() {
+    public List<UserDTO> findAllUsers() {
         return userRepository.findAll().stream().map(mappingUtils::mapToUserDTO).collect(Collectors.toList());
     }
 
-    public UserDTO findById(int id) {
+    public UserDTO findUserById(int id) {
         return userRepository.findById(id).map(mappingUtils::mapToUserDTO).orElse(null);
     }
 
-    public UserDTO create(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) {
         User user = mappingUtils.mapToUser(userDTO);
         userRepository.save(user);
         return mappingUtils.mapToUserDTO(user);
     }
 
-    public UserDTO update(int id, UserDTO userDTO) {
+    public UserDTO updateUser(int id, UserDTO userDTO) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setUserName(userDTO.getUserName());
         user.setPassword(userDTO.getPassword());
@@ -45,7 +45,7 @@ public class UserService {
         return mappingUtils.mapToUserDTO(user);
     }
 
-    public void delete(int id) {
+    public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
 }
