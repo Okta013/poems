@@ -23,7 +23,7 @@ public class PoemController {
     }
 
     @GetMapping("/{id}")
-    public PoemDTO getPoemById(@RequestParam int id) {
+    public PoemDTO getPoemById(@PathVariable int id) {
         return poemService.getPoemById(id);
     }
 

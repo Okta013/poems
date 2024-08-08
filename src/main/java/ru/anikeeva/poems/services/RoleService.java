@@ -27,7 +27,7 @@ public class RoleService {
     }
 
     public RoleDTO getRoleById(int id) {
-        return mappingUtils.mapToRoleDTO(roleRepository.findById(id).orElse(null));
+        return roleRepository.findById(id).map(mappingUtils::mapToRoleDTO).orElse(null);
     }
 
     public RoleDTO createRole(RoleDTO roleDTO) {

@@ -26,7 +26,7 @@ public class PoemService {
     }
 
     public PoemDTO getPoemById(int id) {
-        return mappingUtils.mapToPoemDTO(poemRepository.findById(id).orElse(null));
+        return poemRepository.findById(id).map(mappingUtils::mapToPoemDTO).orElse(null);
     }
 
     public PoemDTO createPoem(PoemDTO poemDTO) {
