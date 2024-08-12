@@ -32,8 +32,9 @@ public class PoemController {
 
     @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")
     @GetMapping("/search")
-    public PoemDTO getPoemByName(@RequestParam String name) {
-        return poemService.getPoemByName(name);
+    public List<PoemDTO> searchPoems(@RequestParam(required = false) String name,
+                                     @RequestParam(required = false) String authorName) {
+        return poemService.searchPoems(name, authorName);
     }
 
     @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")

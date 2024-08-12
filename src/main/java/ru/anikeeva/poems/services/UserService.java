@@ -49,5 +49,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public UserDTO findUserByUsername(String username) {
+        return userRepository.findByUsername(username).map(mappingUtils::mapToUserDTO).orElse(null);
+    }
 
 }

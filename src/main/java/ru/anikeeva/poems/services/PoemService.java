@@ -3,22 +3,28 @@ package ru.anikeeva.poems.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.anikeeva.poems.dtos.PoemDTO;
+import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.entities.Poem;
+import ru.anikeeva.poems.entities.User;
 import ru.anikeeva.poems.repositories.PoemRepository;
 import ru.anikeeva.poems.utils.MappingUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class PoemService {
     private final PoemRepository poemRepository;
     private final MappingUtils mappingUtils;
+    private final UserService userService;
 
     @Autowired
-    public PoemService(PoemRepository poemRepository, MappingUtils mappingUtils) {
+    public PoemService(PoemRepository poemRepository, MappingUtils mappingUtils, UserService userService) {
         this.poemRepository = poemRepository;
         this.mappingUtils = mappingUtils;
+        this.userService = userService;
     }
 
     public List<PoemDTO> getAllPoems() {
@@ -29,8 +35,13 @@ public class PoemService {
         return poemRepository.findById(id).map(mappingUtils::mapToPoemDTO).orElse(null);
     }
 
-    public PoemDTO getPoemByName(String name) {
-        return poemRepository.findByName(name).map(mappingUtils::mapToPoemDTO).orElse(null);
+    public List<PoemDTO> getPoemByName(String name) {
+        return poemRepository.findByName(name).stream().map(mappingUtils::mapToPoemDTO).collect(Collectors.toList());
+    }
+
+    public List<PoemDTO> getPoemByAuthor(String authorName) {
+        UserDTO author = userService.findUserByUsername(authorName);
+        return new ArrayList<>(author.getCreatedPoems().stream().map(mappingUtils::mapToPoemDTO).toList());
     }
 
     public PoemDTO createPoem(PoemDTO poemDTO) {
@@ -50,4 +61,12 @@ public class PoemService {
     public void deletePoem(int id) {
         poemRepository.deleteById(id);
     }
+
+    public List<PoemDTO> searchPoems(String name, String authorName) {
+        if (Optional.ofNullable(name).isPresent()) return getPoemByName(name);
+        else if (Optional.ofNullable(authorName).isPresent()) return getPoemByAuthor(authorName);
+        else return getAllPoems();
+    }
+
+
 }
