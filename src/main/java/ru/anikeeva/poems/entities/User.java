@@ -1,12 +1,15 @@
 package ru.anikeeva.poems.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users",
@@ -23,23 +26,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@NotBlank
-    //@Size(min = 3, max = 20)
     @Column(name="username")
     private String username;
 
-    //@NotBlank
-    //@Size(min = 6, max = 20)
     @Column(name="password")
     private String password;
 
-//    @Size(min = 3, max = 100)
-//    @Column(name="full_name")
     private String fullName;
 
-//    @NotBlank
-//    @Size(min = 4, max = 50)
-//    @Email
     @Column(name="email")
     private String email;
 

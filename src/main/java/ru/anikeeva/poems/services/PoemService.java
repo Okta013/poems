@@ -29,6 +29,10 @@ public class PoemService {
         return poemRepository.findById(id).map(mappingUtils::mapToPoemDTO).orElse(null);
     }
 
+    public PoemDTO getPoemByName(String name) {
+        return poemRepository.findByName(name).map(mappingUtils::mapToPoemDTO).orElse(null);
+    }
+
     public PoemDTO createPoem(PoemDTO poemDTO) {
         Poem poem = mappingUtils.mapToPoem(poemDTO);
         poemRepository.save(poem);

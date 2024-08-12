@@ -1,6 +1,7 @@
 package ru.anikeeva.poems.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.services.UserService;
@@ -38,6 +39,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
