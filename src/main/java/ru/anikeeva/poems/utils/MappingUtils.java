@@ -1,9 +1,11 @@
 package ru.anikeeva.poems.utils;
 
 import org.springframework.stereotype.Component;
+import ru.anikeeva.poems.dtos.FavouriteDTO;
 import ru.anikeeva.poems.dtos.PoemDTO;
 import ru.anikeeva.poems.dtos.RoleDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
+import ru.anikeeva.poems.entities.Favourite;
 import ru.anikeeva.poems.entities.Poem;
 import ru.anikeeva.poems.entities.Role;
 import ru.anikeeva.poems.entities.User;
@@ -59,4 +61,20 @@ public class MappingUtils {
         role.setName(dto.getName());
         return role;
     }
+
+    public FavouriteDTO mapToFavouriteDTO(Favourite favourite) {
+        FavouriteDTO dto = new FavouriteDTO();
+        dto.setId(favourite.getId());
+        dto.setUserId(favourite.getUser().getId());
+        dto.setPoemId(favourite.getPoem().getId());
+        return dto;
+    }
+
+//    public Favourite maptoFavourite(FavouriteDTO dto) {
+//        Favourite favourite = new Favourite();
+//        favourite.setId(dto.getId());
+//        favourite.setUser(dto.getUserId());
+//        favourite.setPoem(dto.getPoem());
+//        return favourite;
+//    }
 }

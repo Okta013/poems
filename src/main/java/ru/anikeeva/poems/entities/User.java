@@ -39,15 +39,6 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name="users_poems",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "poem_id")
-    )
-    private List<Poem> favouritePoems;
-
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")

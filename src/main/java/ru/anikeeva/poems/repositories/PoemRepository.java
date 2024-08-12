@@ -6,6 +6,6 @@ import ru.anikeeva.poems.entities.Poem;
 import java.util.List;
 import java.util.Optional;
 
-public interface PoemRepository extends JpaRepository<Poem, Integer> {
+public interface PoemRepository extends JpaRepository<Poem, Long> {
     List<Poem> findByName(String name);
 }

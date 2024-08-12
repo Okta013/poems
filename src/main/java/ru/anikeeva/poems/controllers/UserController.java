@@ -1,9 +1,12 @@
 package ru.anikeeva.poems.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ru.anikeeva.poems.dtos.FavouriteDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
+import ru.anikeeva.poems.services.FavouriteService;
 import ru.anikeeva.poems.services.UserService;
 
 import java.util.List;
@@ -12,10 +15,12 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService userService;
+    private final FavouriteService favouriteService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FavouriteService favouriteService) {
         this.userService = userService;
+        this.favouriteService = favouriteService;
     }
 
     @GetMapping
@@ -47,6 +52,12 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @GetMapping("/{id}/favourites")
+    public ResponseEntity<List<FavouriteDTO>> getFavouritePoems(@PathVariable Long id) {
+        List<FavouriteDTO> favouritePoems = favouriteService.getFavouritePoems(id);
+        return ResponseEntity.ok(favouritePoems);
     }
 
 }

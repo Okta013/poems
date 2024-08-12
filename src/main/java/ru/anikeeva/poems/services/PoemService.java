@@ -31,7 +31,7 @@ public class PoemService {
         return poemRepository.findAll().stream().map(mappingUtils::mapToPoemDTO).collect(Collectors.toList());
     }
 
-    public PoemDTO getPoemById(int id) {
+    public PoemDTO getPoemById(Long id) {
         return poemRepository.findById(id).map(mappingUtils::mapToPoemDTO).orElse(null);
     }
 
@@ -50,7 +50,7 @@ public class PoemService {
         return mappingUtils.mapToPoemDTO(poem);
     }
 
-    public PoemDTO updatePoem(int id, PoemDTO poemDTO) {
+    public PoemDTO updatePoem(Long id, PoemDTO poemDTO) {
         Poem poem = poemRepository.findById(id).orElseThrow(() -> new RuntimeException("Poem not found"));
         poem.setName(poemDTO.getName());
         poem.setContent(poemDTO.getContent());
@@ -58,7 +58,7 @@ public class PoemService {
         return mappingUtils.mapToPoemDTO(poem);
     }
 
-    public void deletePoem(int id) {
+    public void deletePoem(Long id) {
         poemRepository.deleteById(id);
     }
 

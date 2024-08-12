@@ -16,7 +16,6 @@ public class UserDTO {
     private String password;
     private String fullName;
     private String email;
-    private List<Poem> favouritePoems;
     private Set<Role> roles = new HashSet<>();
     private List<Poem> createdPoems = new ArrayList<>();
 }
