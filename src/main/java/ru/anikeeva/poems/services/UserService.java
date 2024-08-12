@@ -60,13 +60,15 @@ public class UserService {
 
         if (currentUser.getRoles().contains(ROLE_ADMIN)) {
             if (!user.getId().equals(currentUser.getId())) {
-                userRepository.delete(user);
+                user.setActive(false);
+                userRepository.save(user);
             } else {
                 throw new IllegalArgumentException("Administrator cannot delete themselves");
             }
         } else {
             if (user.getId().equals(currentUser.getId())) {
-                userRepository.delete(user);
+                user.setActive(false);
+                userRepository.save(user);
             } else {
                 throw new AccessDeniedException("You are not authorized to delete this user");
             }

@@ -49,6 +49,8 @@ public class User {
     @JoinColumn(name = "author_id")
     private List<Poem> createdPoems = new ArrayList<>();
 
+    private boolean isActive;
+
     public User(String username, String email, String password) {
         this.username = username;
         this.password = password;
