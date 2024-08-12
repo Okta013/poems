@@ -13,7 +13,7 @@ public class MappingUtils {
     public UserDTO mapToUserDTO(User user) {
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
-        dto.setUserName(user.getUserName());
+        dto.setUsername(user.getUsername());
         dto.setPassword(user.getPassword());
         dto.setFullName(user.getFullName());
         dto.setEmail(user.getEmail());
@@ -23,7 +23,7 @@ public class MappingUtils {
     public User mapToUser(UserDTO dto) {
         User user = new User();
         user.setId(dto.getId());
-        user.setUserName(dto.getUserName());
+        user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
         user.setFullName(dto.getFullName());
         user.setEmail(dto.getEmail());

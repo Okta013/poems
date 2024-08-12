@@ -25,7 +25,7 @@ public class UserService {
         return userRepository.findAll().stream().map(mappingUtils::mapToUserDTO).collect(Collectors.toList());
     }
 
-    public UserDTO findUserById(int id) {
+    public UserDTO findUserById(Long id) {
         return userRepository.findById(id).map(mappingUtils::mapToUserDTO).orElse(null);
     }
 
@@ -35,9 +35,9 @@ public class UserService {
         return mappingUtils.mapToUserDTO(user);
     }
 
-    public UserDTO updateUser(int id, UserDTO userDTO) {
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setUserName(userDTO.getUserName());
+        user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         user.setFullName(userDTO.getFullName());
         user.setEmail(userDTO.getEmail());
@@ -45,7 +45,7 @@ public class UserService {
         return mappingUtils.mapToUserDTO(user);
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 }

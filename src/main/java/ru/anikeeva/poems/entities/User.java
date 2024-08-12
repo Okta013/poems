@@ -1,14 +1,19 @@
 package ru.anikeeva.poems.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
-@Table(name="users")
+@Table(name="users",
+uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 @Setter
 @Getter
 @NoArgsConstructor
@@ -16,21 +21,29 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name="user_name")
-    private String userName;
+    //@NotBlank
+    //@Size(min = 3, max = 20)
+    @Column(name="username")
+    private String username;
 
+    //@NotBlank
+    //@Size(min = 6, max = 20)
     @Column(name="password")
     private String password;
 
-    @Column(name="full_name")
+//    @Size(min = 3, max = 100)
+//    @Column(name="full_name")
     private String fullName;
 
+//    @NotBlank
+//    @Size(min = 4, max = 50)
+//    @Email
     @Column(name="email")
     private String email;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="users_poems",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -39,16 +52,21 @@ public class User {
     private List<Poem> favouritePoems;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Collection<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "author_id")
     private List<Poem> createdPoems = new ArrayList<>();
 
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 }
