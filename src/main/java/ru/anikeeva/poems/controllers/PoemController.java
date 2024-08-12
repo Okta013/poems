@@ -36,6 +36,7 @@ public class PoemController {
         return poemService.getPoemByName(name);
     }
 
+    @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @PostMapping("/new")
     public PoemDTO createPoem(@RequestBody PoemDTO poem) {
         return poemService.createPoem(poem);

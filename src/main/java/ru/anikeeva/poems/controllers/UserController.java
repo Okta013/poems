@@ -19,21 +19,26 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserDTO> getALLUsers() {
         return userService.findAllUsers();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDTO getUserById(@PathVariable Long id) {
         return userService.findUserById(id);
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
+
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         return userService.updateUser(id, userDTO);
     }
