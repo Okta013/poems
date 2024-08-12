@@ -3,6 +3,7 @@ package ru.anikeeva.poems.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.anikeeva.poems.dtos.FavouriteDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
@@ -49,9 +50,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id, @AuthenticationPrincipal UserDTO currentUser) {
+        userService.deleteUser(id, currentUser);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/favourites")
