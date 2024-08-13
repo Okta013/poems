@@ -49,22 +49,26 @@ public class PoemController {
         return poemService.createPoem(poem);
     }
 
+    @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @PutMapping("/{id}")
     public PoemDTO updatePoem(@PathVariable Long id, @RequestBody PoemDTO poem) {
         return poemService.updatePoem(id, poem);
     }
 
+    @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deletePoem(@PathVariable Long id) {
         poemService.deletePoem(id);
     }
 
+    @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")
     @PostMapping("/{id}/favourite")
     public ResponseEntity<String> addFavouritePoem(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         favouriteService.addFavouritePoem(id, userDTO.getId());
         return ResponseEntity.ok("Poem added to favourites");
     }
 
+    @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")
     @DeleteMapping("/{id}/favourite")
     public ResponseEntity<String> removeFavouritePoem(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         favouriteService.removeFavouritePoem(id, userDTO.getId());
