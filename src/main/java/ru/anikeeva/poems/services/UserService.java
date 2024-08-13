@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.entities.User;
@@ -54,7 +55,8 @@ public class UserService {
         return mappingUtils.mapToUserDTO(user);
     }
 
-    public void deleteUser(Long userId, UserDTO currentUser) {
+    public void deleteUser(Long userId, UserDetails userDetails) {
+        User currentUser = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
