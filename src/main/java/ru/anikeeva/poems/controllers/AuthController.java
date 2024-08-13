@@ -64,7 +64,8 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity
-                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
+                        userDetails.getEmail(), userDetails.getFullName(), userDetails.isActive(), roles));
     }
 
     @PostMapping("/signup")
@@ -77,7 +78,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
+        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getFullName(), signUpRequest.isActive(),
                 encoder.encode(signUpRequest.getPassword()
                 ));
 

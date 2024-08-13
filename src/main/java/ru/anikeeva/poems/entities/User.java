@@ -58,4 +58,12 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
+    public User(String username, String email, String fullName, boolean isActive, String password) {
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.isActive = isActive;
+        this.password = password;
+    }
 }

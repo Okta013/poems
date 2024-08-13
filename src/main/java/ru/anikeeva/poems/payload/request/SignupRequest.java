@@ -21,6 +21,13 @@ public class SignupRequest {
     @Email
     private String email;
 
+    @Size(min = 3)
+    private String fullName;
+
+    @NotBlank
+    private boolean isActive;
+
+    @NotBlank
     private Set<String> role;
 
     @NotBlank
