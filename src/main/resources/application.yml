@@ -1,0 +1,15 @@
+jwtExpirationMs: 86400000
+jwtSecret: =====================================SecretnyiSecret================================
+spring:
+    application:
+        name: poems
+    datasource:
+        password: ytpkbvtyz
+        url: jdbc:postgresql://localhost:5432/poems2?useSSL=false
+        username: postgres
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
