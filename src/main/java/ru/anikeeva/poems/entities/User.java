@@ -32,6 +32,7 @@ public class User {
     @Column(name="password")
     private String password;
 
+    @Column(name="full_name")
     private String fullName;
 
     @Column(name="email")
@@ -49,6 +50,7 @@ public class User {
     @JoinColumn(name = "author_id")
     private List<Poem> createdPoems = new ArrayList<>();
 
+    @Column(name="is_active")
     private boolean isActive;
 
     public User(String username, String email, String password) {

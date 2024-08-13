@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: v1/master.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v2/master.yml
+      relativeToChangelogFile: true

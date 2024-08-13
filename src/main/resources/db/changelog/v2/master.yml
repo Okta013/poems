@@ -1,0 +1,13 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 2
+      author: ananan
+
+  - include:
+      file: DDL/change-table-users.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/change-data-for-users.sql
+      relativeToChangelogFile: true

@@ -1,0 +1,29 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: ananan
+
+  - include:
+      file: DDL/create-tables.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/insert-data-users.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/insert-data-poems.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/insert-data-roles.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/insert-data-users-roles.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: DML/insert-data-favourites.sql
+      relativeToChangelogFile: true
