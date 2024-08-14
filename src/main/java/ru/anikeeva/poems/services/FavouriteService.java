@@ -53,7 +53,8 @@ public class FavouriteService {
     }
 
     @Transactional
-    public void removeFavouritePoem(Long userId, Long poemId) {
-        favouriteRepository.deleteByUserIdAndPoemId(userId, poemId);
+    public void removeFavouritePoem(Long poemId, UserDetails userDetails) {
+        User currentUser = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        favouriteRepository.deleteByUserIdAndPoemId(currentUser.getId(), poemId);
     }
 }

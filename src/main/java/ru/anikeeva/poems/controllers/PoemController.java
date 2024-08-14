@@ -71,8 +71,8 @@ public class PoemController {
 
     @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")
     @DeleteMapping("/{id}/favourite")
-    public ResponseEntity<String> removeFavouritePoem(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        favouriteService.removeFavouritePoem(id, userDTO.getId());
+    public ResponseEntity<String> removeFavouritePoem(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser) {
+        favouriteService.removeFavouritePoem(id, currentUser);
         return ResponseEntity.ok("Poem removed from favourites");
     }
 }
