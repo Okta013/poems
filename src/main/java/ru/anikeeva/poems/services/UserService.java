@@ -60,7 +60,7 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        if (currentUser.getRoles().contains(ROLE_ADMIN)) {
+        if (currentUser.getRoles().stream().map(role -> role.getName()).collect(Collectors.toSet()).contains(ROLE_ADMIN)) {
             if (!user.getId().equals(currentUser.getId())) {
                 user.setActive(false);
                 userRepository.save(user);
