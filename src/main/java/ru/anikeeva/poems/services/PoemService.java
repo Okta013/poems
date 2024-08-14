@@ -69,7 +69,9 @@ public class PoemService {
 
     public List<PoemDTO> searchPoems(String name, String authorName) {
         if (Optional.ofNullable(name).isPresent()) return getPoemByName(name);
-        else if (Optional.ofNullable(authorName).isPresent()) return getPoemByAuthor(authorName);
+        else if (Optional.ofNullable(authorName).isPresent())
+            return poemRepository.findAllByAuthorId(userService.findUserByUsername(authorName).getId())
+                    .stream().map(mappingUtils::mapToPoemDTO).collect(Collectors.toList());
         else return getAllPoems();
     }
 

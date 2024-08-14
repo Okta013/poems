@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PoemRepository extends JpaRepository<Poem, Long> {
     List<Poem> findByName(String name);
+
+    List<Poem> findAllByAuthorId(Long authorId);
 }
