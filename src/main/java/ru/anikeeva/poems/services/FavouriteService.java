@@ -5,8 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.anikeeva.poems.dtos.FavouriteDTO;
-import ru.anikeeva.poems.dtos.PoemDTO;
-import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.entities.Favourite;
 import ru.anikeeva.poems.entities.Poem;
 import ru.anikeeva.poems.entities.User;

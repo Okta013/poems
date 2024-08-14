@@ -7,7 +7,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.anikeeva.poems.dtos.PoemDTO;
-import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.services.FavouriteService;
 import ru.anikeeva.poems.services.PoemService;
 

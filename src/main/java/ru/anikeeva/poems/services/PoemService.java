@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.anikeeva.poems.dtos.PoemDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
 import ru.anikeeva.poems.entities.Poem;
-import ru.anikeeva.poems.entities.User;
 import ru.anikeeva.poems.repositories.PoemRepository;
 import ru.anikeeva.poems.utils.MappingUtils;
 

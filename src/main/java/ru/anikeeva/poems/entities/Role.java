@@ -3,8 +3,6 @@ package ru.anikeeva.poems.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.management.relation.RoleNotFoundException;
-
 @Entity
 @Table(name="roles")
 @Getter
