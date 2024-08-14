@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.anikeeva.poems.dtos.PoemDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
@@ -63,8 +64,8 @@ public class PoemController {
 
     @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")
     @PostMapping("/{id}/favourite")
-    public ResponseEntity<String> addFavouritePoem(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        favouriteService.addFavouritePoem(id, userDTO.getId());
+    public ResponseEntity<String> addFavouritePoem(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser) {
+        favouriteService.addFavouritePoem(id, currentUser);
         return ResponseEntity.ok("Poem added to favourites");
     }
 
