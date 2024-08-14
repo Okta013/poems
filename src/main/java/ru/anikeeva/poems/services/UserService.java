@@ -76,4 +76,9 @@ public class UserService {
         return userRepository.findByUsername(username).map(mappingUtils::mapToUserDTO).orElse(null);
     }
 
+    public void activateUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setActive(true);
+        userRepository.save(user);
+    }
 }

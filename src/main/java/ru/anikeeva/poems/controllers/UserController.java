@@ -62,4 +62,11 @@ public class UserController {
         return ResponseEntity.ok(favouritePoems);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}/activate")
+    public ResponseEntity<Void> activateUser(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser) {
+        userService.activateUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
