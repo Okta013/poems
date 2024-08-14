@@ -43,11 +43,15 @@ public class FavouriteService {
         return mappingUtils.mapToFavouriteDTO(favourite);
     }
 
-    public List<FavouriteDTO> getFavouritePoems(Long userId) {
-        List<Favourite> favouritePoems = favouriteRepository.findByUserId(userId);
-        return favouritePoems.stream()
-                .map(mappingUtils::mapToFavouriteDTO)
-                .collect(Collectors.toList());
+    public List<FavouriteDTO> getFavouritePoems(Long userId, UserDetails userDetails) {
+        User currentUser = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        if (currentUser.getId().equals(userId)) {
+            List<Favourite> favouritePoems = favouriteRepository.findByUserId(userId);
+            return favouritePoems.stream()
+                    .map(mappingUtils::mapToFavouriteDTO)
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
     @Transactional

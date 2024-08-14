@@ -57,8 +57,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}/favourites")
-    public ResponseEntity<List<FavouriteDTO>> getFavouritePoems(@PathVariable Long id) {
-        List<FavouriteDTO> favouritePoems = favouriteService.getFavouritePoems(id);
+    public ResponseEntity<List<FavouriteDTO>> getFavouritePoems(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser) {
+        List<FavouriteDTO> favouritePoems = favouriteService.getFavouritePoems(id, currentUser);
         return ResponseEntity.ok(favouritePoems);
     }
 
