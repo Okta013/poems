@@ -37,6 +37,7 @@ public class MappingUtils {
         dto.setId(poem.getId());
         dto.setName(poem.getName());
         dto.setContent(poem.getContent());
+        dto.setAuthorId(poem.getAuthorId());
         return dto;
     }
 
@@ -45,6 +46,7 @@ public class MappingUtils {
         poem.setId(dto.getId());
         poem.setName(dto.getName());
         poem.setContent(dto.getContent());
+        poem.setAuthorId(dto.getAuthorId());
         return poem;
     }
 

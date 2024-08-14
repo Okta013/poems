@@ -1,10 +1,7 @@
 package ru.anikeeva.poems.services;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ru.anikeeva.poems.dtos.UserDTO;
@@ -12,10 +9,8 @@ import ru.anikeeva.poems.entities.User;
 import ru.anikeeva.poems.exception.ResourceNotFoundException;
 import ru.anikeeva.poems.repositories.UserRepository;
 import ru.anikeeva.poems.utils.MappingUtils;
-import ru.anikeeva.poems.entities.ERole;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static ru.anikeeva.poems.entities.ERole.ROLE_ADMIN;

@@ -46,8 +46,8 @@ public class PoemController {
 
     @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @PostMapping("/new")
-    public PoemDTO createPoem(@RequestBody PoemDTO poem) {
-        return poemService.createPoem(poem);
+    public PoemDTO createPoem(@RequestBody PoemDTO poem, @AuthenticationPrincipal UserDetails currentUser) {
+        return poemService.createPoem(poem, currentUser);
     }
 
     @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")

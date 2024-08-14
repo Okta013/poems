@@ -19,4 +19,7 @@ public class Poem {
 
     @Column(name="content")
     private String content;
+
+    @Column(name="author_id")
+    private Long authorId;
 }

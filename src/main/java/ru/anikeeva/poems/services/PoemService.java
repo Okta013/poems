@@ -1,6 +1,7 @@
 package ru.anikeeva.poems.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ru.anikeeva.poems.dtos.PoemDTO;
 import ru.anikeeva.poems.dtos.UserDTO;
@@ -44,8 +45,9 @@ public class PoemService {
         return new ArrayList<>(author.getCreatedPoems().stream().map(mappingUtils::mapToPoemDTO).toList());
     }
 
-    public PoemDTO createPoem(PoemDTO poemDTO) {
+    public PoemDTO createPoem(PoemDTO poemDTO, UserDetails currentUser) {
         Poem poem = mappingUtils.mapToPoem(poemDTO);
+        poem.setAuthorId(userService.findUserByUsername(currentUser.getUsername()).getId());
         poemRepository.save(poem);
         return mappingUtils.mapToPoemDTO(poem);
     }
