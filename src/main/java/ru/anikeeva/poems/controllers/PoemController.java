@@ -52,14 +52,14 @@ public class PoemController {
 
     @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public PoemDTO updatePoem(@PathVariable Long id, @RequestBody PoemDTO poem) {
-        return poemService.updatePoem(id, poem);
+    public PoemDTO updatePoem(@PathVariable Long id, @RequestBody PoemDTO poem, @AuthenticationPrincipal UserDetails currentUser) {
+        return poemService.updatePoem(id, poem, currentUser);
     }
 
     @PreAuthorize("hasRole('AUTHOR') or hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public void deletePoem(@PathVariable Long id) {
-        poemService.deletePoem(id);
+    public void deletePoem(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser) {
+        poemService.deletePoem(id, currentUser);
     }
 
     @PreAuthorize("hasRole('READER') or hasRole('AUTHOR') or hasRole('ADMIN')")

@@ -52,16 +52,20 @@ public class PoemService {
         return mappingUtils.mapToPoemDTO(poem);
     }
 
-    public PoemDTO updatePoem(Long id, PoemDTO poemDTO) {
+    public PoemDTO updatePoem(Long id, PoemDTO poemDTO, UserDetails currentUser) {
         Poem poem = poemRepository.findById(id).orElseThrow(() -> new RuntimeException("Poem not found"));
-        poem.setName(poemDTO.getName());
-        poem.setContent(poemDTO.getContent());
-        poemRepository.save(poem);
-        return mappingUtils.mapToPoemDTO(poem);
+        if (poem.getAuthorId().equals(userService.findUserByUsername(currentUser.getUsername()).getId())) {
+            poem.setName(poemDTO.getName());
+            poem.setContent(poemDTO.getContent());
+            poemRepository.save(poem);
+            return mappingUtils.mapToPoemDTO(poem);
+        }
+        return null;
     }
 
-    public void deletePoem(Long id) {
-        poemRepository.deleteById(id);
+    public void deletePoem(Long id, UserDetails currentUser) {
+        Poem poem = poemRepository.findById(id).orElseThrow(() -> new RuntimeException("Poem not found"));
+        if (poem.getAuthorId().equals(userService.findUserByUsername(currentUser.getUsername()).getId())) poemRepository.deleteById(id);
     }
 
     public List<PoemDTO> searchPoems(String name, String authorName) {
